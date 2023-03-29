@@ -6,7 +6,7 @@ on:
       - "main" 
     paths:
       - "SignalR/**"
-      - ".github/workflows/signalr-docker-image.yml"
+      - ".github/workflows/signalr-docker-publish.yml"
 
 jobs:
   push_to_registry:
