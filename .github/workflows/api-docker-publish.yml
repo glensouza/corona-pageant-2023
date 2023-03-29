@@ -5,7 +5,8 @@ on:
     branches:
       - "main" 
     paths:
-      - "/Corona.Pageant.API"
+      - "Corona.Pageant.API/**"
+      - ".github/workflows/api-docker-image.yml"
 
 jobs:
 
