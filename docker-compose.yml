@@ -20,6 +20,8 @@ services:
   signalr:
     container_name: signalr
     image: glenster75/signalremulator
+    volumes:
+      - ./SignalR:/workspace
     ports:
       - '8999:8999'
     restart: unless-stopped

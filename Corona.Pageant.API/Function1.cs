@@ -14,6 +14,7 @@ namespace Corona.Pageant.API
 {
     public static class Function1
     {
+        [SwaggerIgnore]
         [FunctionName("Function1")]
         [QueryStringParameter("name", "this is name", DataType = typeof(string), Required = true)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
@@ -34,6 +35,7 @@ namespace Corona.Pageant.API
             return new OkObjectResult(responseMessage);
         }
 
+        [SwaggerIgnore]
         [FunctionName("Function2")]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
         public static async Task<IActionResult> F2([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)][RequestBodyType(typeof(string), "the name")] string name, ILogger log)
@@ -47,6 +49,8 @@ namespace Corona.Pageant.API
             return new OkObjectResult(responseMessage);
         }
 
+
+        [SwaggerIgnore]
         [FunctionName("Function3")]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
         public static async Task<IActionResult> F3([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)][RequestBodyType(typeof(string), "the name")] HttpRequest req, ILogger log)
@@ -67,6 +71,7 @@ namespace Corona.Pageant.API
             return new OkObjectResult(responseMessage);
         }
 
+        [SwaggerIgnore]
         [FunctionName("Function4")]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.Created)]
         public static async Task<IActionResult> F4(

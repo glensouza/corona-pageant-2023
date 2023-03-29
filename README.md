@@ -9,3 +9,5 @@ API Swagger:
 Web:
 
 <http://localhost>
+
+docker-compose pull && docker-compose up -d
