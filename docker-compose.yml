@@ -3,7 +3,7 @@ version: '3'
 services:
   api:
     container_name: coronapageantapi
-    image: glenster75/Corona.Pageant.API
+    image: glenster75/coronapageantapi
     environment:
       - TZ=America/Los_Angeles
     ports:
@@ -11,7 +11,7 @@ services:
     restart: unless-stopped
   web:
     container_name: coronapageantweb
-    image: glenster75/Corona.Pageant.Web
+    image: glenster75/coronapageantweb
     environment:
       - TZ=America/Los_Angeles
     ports:
