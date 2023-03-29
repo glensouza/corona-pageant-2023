@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  api:
+    container_name: coronapageantapi
+    image: glenster75/Corona.Pageant.API
+    environment:
+      - TZ=America/Los_Angeles
+    ports:
+      - '81:80'
+    restart: unless-stopped
+  web:
+    container_name: coronapageantweb
+    image: glenster75/Corona.Pageant.Web
+    environment:
+      - TZ=America/Los_Angeles
+    ports:
+      - '80:80'
+    restart: unless-stopped
+  signalr:
+    container_name: signalr
+    image: glenster75/signalremulator
+    ports:
+      - '8999:8999'
+    restart: unless-stopped
+  storage:
+    container_name: azurite
+    image: mcr.microsoft.com/azure-storage/azurite
+    volumes:
+      - ./Azurite:/data
+    ports:
+      - '10000:10000'
+      - '10001:10001'
+      - '10002:10002'
+    restart: unless-stopped

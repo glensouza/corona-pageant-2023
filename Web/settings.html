@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="https://chusermedia.s3.amazonaws.com/1885_favicon_18780_android-chrome-192x192.png">
+    <link rel="stylesheet" href="styles.css" />
+    <title>Corona Pageant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand">Corona SDA</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Settings</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <div id="settingsLoading">
+            <img src="spinner.gif" alt="Loading..." />
+        </div>
+        <div id="settingsMain">
+            <h1>Settings</h1>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            OBS
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="mb-3 row">
+                                <label for="ipCam1" class="form-label col-sm-2">Computer</label>
+                                <div class="col-sm-3">
+                                    <select class="form-select" id="obsComputer"></select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button id="obsComputerTest" class="btn btn-primary">Test</button>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="ipCam1" class="form-label col-sm-2">Camera 1</label>
+                                <div class="col-sm-3">
+                                    <select class="form-select" id="obsCam1"></select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button id="obsCam1Test" class="btn btn-primary">Test</button>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="ipCam2" class="form-label col-sm-2">Camera 2</label>
+                                <div class="col-sm-3">
+                                    <select class="form-select" id="obsCam2"></select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button id="obsCam2Test" class="btn btn-primary">Test</button>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="ipCam3" class="form-label col-sm-2">Camera 3</label>
+                                <div class="col-sm-3">
+                                    <select class="form-select" id="obsCam3"></select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button id="obsCam3Test" class="btn btn-primary">Test</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            Cameras
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="mb-3 row">
+                                <label for="ipCam1" class="form-label col-sm-2">Camera 1</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="ipCam1" placeholder="10.0.1.100">
+                                </div>
+                                <div class="col-sm-2">
+                                    <button id="ipCam1Save" class="btn btn-success">Save</button>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="ipCam2" class="form-label col-sm-2">Camera 2</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="ipCam2" placeholder="10.0.0.100">
+                                </div>
+                                <div class="col-sm-2">
+                                    <button id="ipCam2Save" class="btn btn-success">Save</button>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="ipCam3" class="form-label col-sm-2">Camera 3</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="ipCam3" placeholder="10.0.0.100">
+                                </div>
+                                <div class="col-sm-2">
+                                    <button id="ipCam3Save" class="btn btn-success">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="obs-websocket.min.js"></script>
+    <script src="settings.js"></script>
+    <script>
+        $(function () {
+            settings.initialize();
+        });
+    </script>
+</body>
+
+</html>

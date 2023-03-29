@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Corona.Pageant.API": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7016"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 31370,
+      "useSSL": false
+    }
+  }
+}

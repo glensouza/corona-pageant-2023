@@ -5,13 +5,7 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Corona.Pageant.Web", "Corona.Pageant.Web\Corona.Pageant.Web.csproj", "{A690B1F9-7D90-4ED1-A6C3-2C6730AD9DE6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFiles", "{BF9C5E8E-7457-48C5-8543-9E9A8CB80B7B}"
-	ProjectSection(SolutionItems) = preProject
-		.dockerignore = .dockerignore
-		.gitignore = .gitignore
-		.github\workflows\docker-publish.yml = .github\workflows\docker-publish.yml
-		README.md = README.md
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corona.Pageant.API", "Corona.Pageant.API\Corona.Pageant.API.csproj", "{C1A76051-1756-4267-B7B5-9085CCF803A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +17,10 @@ Global
 		{A690B1F9-7D90-4ED1-A6C3-2C6730AD9DE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A690B1F9-7D90-4ED1-A6C3-2C6730AD9DE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A690B1F9-7D90-4ED1-A6C3-2C6730AD9DE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1A76051-1756-4267-B7B5-9085CCF803A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1A76051-1756-4267-B7B5-9085CCF803A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1A76051-1756-4267-B7B5-9085CCF803A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1A76051-1756-4267-B7B5-9085CCF803A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
