@@ -5,8 +5,8 @@ on:
     branches:
       - "main" 
     paths:
-      - "/Web/**"
-      - "/.github/workflows/web-docker-image.yml"
+      - "Web/**"
+      - ".github/workflows/web-docker-image.yml"
 
 jobs:
   push_to_registry:
