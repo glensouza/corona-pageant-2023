@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:7.0
+FROM mcr.microsoft.com/dotnet/sdk:7.0
 
 # Install the simulator tool
 RUN dotnet tool install -g Microsoft.Azure.SignalR.Emulator --version 1.1.0
