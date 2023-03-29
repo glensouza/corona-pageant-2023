@@ -6,7 +6,7 @@ on:
       - "main" 
     paths:
       - "Corona.Pageant.API/**"
-      - ".github/workflows/api-docker-image.yml"
+      - ".github/workflows/api-docker-publish.yml"
 
 jobs:
 
