@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1
 
 # Install the simulator tool
-RUN dotnet tool install -g Microsoft.Azure.SignalR.Emulator --version 1.1.0
+RUN dotnet tool install -g Microsoft.Azure.SignalR.Emulator --version 1.0.0-preview1-10809
 ENV PATH="$PATH:/root/.dotnet/tools"
 
 # create a current working directory
