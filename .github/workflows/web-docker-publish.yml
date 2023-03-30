@@ -18,8 +18,8 @@ jobs:
       
       - name: Replace reference to api in js files
         run: |
-          sed -i 's|http://localhost:31370||g' app.js |
-          sed -i 's|http://localhost:31370||g' settings.js
+          sed -i 's|http://localhost:31370||g' ./Web/app.js |
+          sed -i 's|http://localhost:31370||g' ./Web/settings.js
 
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
