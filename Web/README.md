@@ -25,9 +25,3 @@ docker run -d -p 80:80 Corona.Pageant.Web:v1
 ## Ensure the server is running
 
 <http://localhost>
-
-## Run Locally on Windows with Docker Desktop
-
-```bash
-docker run -d --name CoronaPageantLocalDev -p 8080:80 -v  /$(“pwd”)/Web:/usr/share/nginx/html:ro -v  /$(“pwd”)/Web/nginx.conf:/etc/nginx/nginx.conf -v  /$(“pwd”)/Web/default.conf:/etc/nginx/conf.d/default.conf nginx:alpine
-```
