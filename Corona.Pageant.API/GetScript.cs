@@ -8,15 +8,19 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using System.Net;
+using AzureFunctions.Extensions.Swashbuckle.Attribute;
+using Newtonsoft.Json;
 
 namespace Corona.Pageant.API
 {
     public static class GetScript
     {
         [FunctionName("GetScript")]
+        [ProducesResponseType(typeof(List<Script>), (int)HttpStatusCode.OK)]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "script")] HttpRequest req,
-            [Table("Script")] TableClient scriptTable,
+            [SwaggerIgnore][Table("Script")] TableClient scriptTable,
             ILogger log)
         {
             log.LogInformation("GetScript function processed a request.");
