@@ -84,7 +84,7 @@ var settings = (function () {
             $.ajax({
                 data: { ipAddress: newValue },
                 type: 'POST',
-                url: '/api/camera/' + camera.data.camera + '?code=' + functionKey,
+                url: 'http://localhost:31370/api/camera/' + camera.data.camera + '?code=' + functionKey,
                 success: function (result) { },
                 error: function (xhr, status, error) {
                     let errorMessage = `${xhr.status} ${status} `;
@@ -121,7 +121,7 @@ var settings = (function () {
             $.ajax({
                 data: { scene: newValue },
                 type: 'POST',
-                url: '/api/obs/' + scene.data.scene + '?code=' + functionKey,
+                url: 'http://localhost:31370/api/obs/' + scene.data.scene + '?code=' + functionKey,
                 success: function (result) {
                     switch (scene.data.scene) {
                         case "ComputerScene":
@@ -191,7 +191,7 @@ var settings = (function () {
         showLoading();
         $.ajax({
             type: 'GET',
-            url: '/api/settings',
+            url: 'http://localhost:31370/api/settings',
             success: function (result, status, xhr) {
                 $.each(result, function (index, setting) {
                     showLoading();

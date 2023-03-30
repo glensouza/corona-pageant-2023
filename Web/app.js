@@ -166,7 +166,7 @@ var pageant = (function () {
                 switchToScene: scriptSwitchToScene.val()
             },
             type: 'POST',
-            url: '/api/script/' + act + '/' + scene + '?code=' + functionKey,
+            url: 'http://localhost:31370/api/script/' + act + '/' + scene + '?code=' + functionKey,
             success: function (result) {
                 location.reload(true);
             },
@@ -223,7 +223,7 @@ var pageant = (function () {
         showLoading();
         $.ajax({
             type: 'GET',
-            url: '/api/script?code=' + functionKey,
+            url: 'http://localhost:31370/api/script?code=' + functionKey,
             success: function (result, status, xhr) {
                 fullScript = result;
                 $.each(result, function (index, script) {
@@ -257,15 +257,12 @@ var pageant = (function () {
         showLoading();
         $.ajax({
             type: 'GET',
-            url: '/api/settings',
+            url: 'http://localhost:31370/api/settings',
             success: function (result, status, xhr) {
+                getScript();
                 $.each(result, function (index, setting) {
                     showLoading();
                     switch (setting.settingType) {
-                        case "Function":
-                            functionKey = setting.setting;
-                            getScript();
-                            break;
                         case "OBS":
                             switch (setting.settingId) {
                                 case "ComputerScene":
