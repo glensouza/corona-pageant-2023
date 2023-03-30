@@ -37,29 +37,7 @@ var pageant = (function () {
         })
     });
 
-    const signalRConnection = new signalR.HubConnectionBuilder()
-        .withUrl("http://localhost:31370/api")
-        .configureLogging(signalR.LogLevel.Information)
-        .build();
-
-    async function startSignalR() {
-        try {
-            await signalRConnection.start();
-            console.log("SignalR Connected.");
-        } catch (err) {
-            console.log(err);
-            setTimeout(startSignalR, 5000);
-        }
-    };
-
-    signalRConnection.onclose(async () => {
-        await startSignalR();
-    });
-
     const initialize = function () {
-        // Start the SignalR connection.
-        startSignalR();
-
         pageantLoading = $("#pageantLoading");
         pageantMain = $("#pageantMain");
         scriptAct = $("#act");

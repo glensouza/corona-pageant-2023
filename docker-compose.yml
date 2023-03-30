@@ -17,14 +17,6 @@ services:
     ports:
       - '80:80'
     restart: unless-stopped
-  signalr:
-    container_name: signalr
-    image: glenster75/signalremulator
-    volumes:
-      - ./SignalR:/workspace
-    ports:
-      - '8999:8999'
-    restart: unless-stopped
   storage:
     container_name: azurite
     image: mcr.microsoft.com/azure-storage/azurite
