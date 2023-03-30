@@ -2,7 +2,8 @@
   "profiles": {
     "Corona.Pageant.API": {
       "commandName": "Project",
-      "commandLineArgs": "--port 31370"
+      "commandLineArgs": "--port 31370",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/swagger/ui"
     },
     "Docker": {
       "commandName": "Docker",
