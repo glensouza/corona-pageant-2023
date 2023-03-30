@@ -38,7 +38,7 @@ namespace Corona.Pageant.API
         [SwaggerIgnore]
         [FunctionName("Function2")]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
-        public static async Task<IActionResult> F2([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)][RequestBodyType(typeof(string), "the name")] string name, ILogger log)
+        public static IActionResult F2([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)][RequestBodyType(typeof(string), "the name")] string name, ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
@@ -82,9 +82,9 @@ namespace Corona.Pageant.API
         {
             if (httpRequest.Method.Equals("post", StringComparison.OrdinalIgnoreCase))
             {
-                using (var reader = new StreamReader(httpRequest.Body))
+                using (StreamReader reader = new StreamReader(httpRequest.Body))
                 {
-                    var json = await reader.ReadToEndAsync();
+                    string json = await reader.ReadToEndAsync();
                     //var testModel = JsonConvert.DeserializeObject<string>(json);
                     //return new CreatedResult("", testModel);
                     return new CreatedResult("", json);
