@@ -1,0 +1,113 @@
+﻿@page
+@model Corona.Pageant.Pages.SettingsModel
+@{
+    ViewData["Title"] = "Settings";
+}
+
+<div id="settingsLoading">
+    <img src="spinner.gif" alt="Loading..." />
+</div>
+<div id="settingsMain">
+    <h1>Settings</h1>
+    <div class="accordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    OBS
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="mb-3 row">
+                        <label for="ipCam1" class="form-label col-sm-2">Computer</label>
+                        <div class="col-sm-3">
+                            <select class="form-select" id="obsComputer"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <button id="obsComputerTest" class="btn btn-primary">Test</button>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="ipCam1" class="form-label col-sm-2">Camera 1</label>
+                        <div class="col-sm-3">
+                            <select class="form-select" id="obsCam1"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <button id="obsCam1Test" class="btn btn-primary">Test</button>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="ipCam2" class="form-label col-sm-2">Camera 2</label>
+                        <div class="col-sm-3">
+                            <select class="form-select" id="obsCam2"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <button id="obsCam2Test" class="btn btn-primary">Test</button>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="ipCam3" class="form-label col-sm-2">Camera 3</label>
+                        <div class="col-sm-3">
+                            <select class="form-select" id="obsCam3"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <button id="obsCam3Test" class="btn btn-primary">Test</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    Cameras
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="mb-3 row">
+                        <label for="ipCam1" class="form-label col-sm-2">Camera 1</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="ipCam1" placeholder="10.0.1.100">
+                        </div>
+                        <div class="col-sm-2">
+                            <button id="ipCam1Save" class="btn btn-success">Save</button>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="ipCam2" class="form-label col-sm-2">Camera 2</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="ipCam2" placeholder="10.0.0.100">
+                        </div>
+                        <div class="col-sm-2">
+                            <button id="ipCam2Save" class="btn btn-success">Save</button>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="ipCam3" class="form-label col-sm-2">Camera 3</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="ipCam3" placeholder="10.0.0.100">
+                        </div>
+                        <div class="col-sm-2">
+                            <button id="ipCam3Save" class="btn btn-success">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="settings.js"></script>
+    <script>
+        $(function () {
+            settings.initialize();
+        });
+    </script>
+}

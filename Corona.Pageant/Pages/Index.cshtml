@@ -1,0 +1,124 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div id="pageantLoading">
+    <img src="spinner.gif" alt="Loading..." />
+</div>
+<div id="pageantMain">
+    <h1>Passion and Resurrection Pageant</h1>
+    <div id="theScript"></div>
+    <div class="row">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#script">
+            Add Script Part
+        </button>
+    </div>
+</div>
+
+<!-- Add Script Modal -->
+<div class="modal fade" id="script" tabindex="-1" aria-labelledby="scriptLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scriptLabel">Script Part</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 row">
+                    <label for="act" class="col-sm-2 col-form-label">Act</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="act" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="scene" class="col-sm-2 col-form-label">Scene</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="scene" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="switchToScene" class="col-sm-4 col-form-label">Switch to Scene</label>
+                    <div class="col-sm-4">
+                        <div class="col-sm-10">
+                            <select class="form-select" id="switchToScene">
+                                <option value="computer">Computer</option>
+                                <option value="cam1">Camera 1</option>
+                                <option value="cam2">Camera 2</option>
+                                <option value="cam3">Camera 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <h4>Camera 1</h4>
+                <div class="mb-3 row">
+                    <label for="camera1Action" class="col-sm-2 col-form-label">Action</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" id="camera1Action">
+                            <option value="none">None</option>
+                            <option value="prepare">Prepare</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="camera1Position" class="col-sm-2 col-form-label">Position</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="camera1Position">
+                    </div>
+                </div>
+                <h4>Camera 2</h4>
+                <div class="mb-3 row">
+                    <label for="camera2Action" class="col-sm-2 col-form-label">Action</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" id="camera2Action">
+                            <option value="none">None</option>
+                            <option value="prepare">Prepare</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="camera2Position" class="col-sm-2 col-form-label">Position</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="camera2Position">
+                    </div>
+                </div>
+                <h4>Camera 3</h4>
+                <div class="mb-3 row">
+                    <label for="camera3Action" class="col-sm-2 col-form-label">Action</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" id="camera3Action">
+                            <option value="none">None</option>
+                            <option value="prepare">Prepare</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="camera3Position" class="col-sm-2 col-form-label">Position</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="camera3Position">
+                    </div>
+                </div>
+                <h4>Text</h4>
+                <div class="mb-3 row">
+                    <div class="col-sm-10">
+                        <textarea class="form-control" id="scriptText" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveScript">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="app.js"></script>
+    <script>
+        $(function () {
+            pageant.initialize();
+        });
+    </script>
+}

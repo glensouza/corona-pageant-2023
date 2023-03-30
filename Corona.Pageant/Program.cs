@@ -57,6 +57,21 @@ app.MapGet("/api/settings", async (PageantDb db) => await db.Settings.ToListAsyn
 
 app.MapPost("/api/script", async (Scripts script, PageantDb db) =>
     {
+        if (string.IsNullOrEmpty(script.Camera1Position))
+        {
+            script.Camera1Position = string.Empty;
+        }
+
+        if (string.IsNullOrEmpty(script.Camera2Position))
+        {
+            script.Camera2Position = string.Empty;
+        }
+
+        if (string.IsNullOrEmpty(script.Camera3Position))
+        {
+            script.Camera3Position = string.Empty;
+        }
+
         if (!MiniValidator.TryValidate(script, out IDictionary<string, string[]>? errors))
         {
             return Results.ValidationProblem(errors);

@@ -2,31 +2,10 @@ version: '3'
 
 services:
   api:
-    container_name: coronapageantapi
-    image: glenster75/coronapageantapi
-    environment:
-      - TZ=America/Los_Angeles
-      - AzureWebJobsStorage='DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://10.10.10.10:10000/devstoreaccount1;QueueEndpoint=http://10.10.10.10:10001/devstoreaccount1;TableEndpoint=http://10.10.10.10:10002/devstoreaccount1;',
-    ports:
-      - '81:80'
-    restart: unless-stopped
-  web:
-    container_name: coronapageantweb
-    image: glenster75/coronapageantweb
+    container_name: coronapageant
+    image: glenster75/coronapageant
     environment:
       - TZ=America/Los_Angeles
     ports:
       - '80:80'
-    restart: unless-stopped
-  storage:
-    container_name: azurite
-    image: mcr.microsoft.com/azure-storage/azurite
-    environment:
-      - TZ=America/Los_Angeles
-    volumes:
-      - ./Azurite:/data
-    ports:
-      - '10000:10000'
-      - '10001:10001'
-      - '10002:10002'
     restart: unless-stopped
