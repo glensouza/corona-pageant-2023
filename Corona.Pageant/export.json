@@ -1,0 +1,44 @@
+{
+  "scripts": [
+    {
+      "id": 1,
+      "act": "1",
+      "scene": "1",
+      "text": "text",
+      "switchToScene": "string",
+      "camera1Action": "string",
+      "camera1Position": "string",
+      "camera2Action": "string",
+      "camera2Position": "string",
+      "camera3Action": "string",
+      "camera3Position": "string"
+    },
+    {
+      "id": 2,
+      "act": "1",
+      "scene": "2",
+      "text": "text",
+      "switchToScene": "string",
+      "camera1Action": "string",
+      "camera1Position": null,
+      "camera2Action": "string",
+      "camera2Position": null,
+      "camera3Action": "string",
+      "camera3Position": null
+    }
+  ],
+  "settings": [
+    {
+      "id": 1,
+      "settingType": "Camera",
+      "settingId": "1",
+      "setting": "111.111"
+    },
+    {
+      "id": 2,
+      "settingType": "OBS",
+      "settingId": "aa",
+      "setting": "ggg"
+    }
+  ]
+}

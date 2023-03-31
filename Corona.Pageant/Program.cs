@@ -1,7 +1,10 @@
 using Corona.Pageant.Database;
 using Corona.Pageant.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MiniValidation;
+using System.Text;
+using System.Text.Json;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,8 @@ builder.Services.AddSwaggerGen();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.ConfigureHttpJsonOptions(options => options.SerializerOptions.PropertyNameCaseInsensitive = true);
 
 WebApplication app = builder.Build();
 
@@ -38,6 +43,77 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+app.MapGet("/api/export", async (PageantDb db) =>
+    {
+        Export export = new()
+        {
+            Scripts = await db.Scripts.ToListAsync(),
+            Settings = await db.Settings.ToListAsync()
+        };
+        return Results.Ok(export);
+    })
+    .WithName("GetExport")
+    .Produces<Export>();
+
+app.MapPost("/api/import/file", async (IFormFile file) =>
+    {
+        if (file.Length == 0)
+        {
+            return Results.BadRequest("File cannot be empty");
+        }
+
+        await using Stream stream = file.OpenReadStream();
+
+        StreamReader reader = new(stream);
+        string text = await reader.ReadToEndAsync();
+
+        //JsonSerializerOptions options = new()
+        //{
+        //    //PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        //    PropertyNameCaseInsensitive = true
+        //};
+
+        //Export? import = JsonSerializer.Deserialize<Export>(text, options);
+        Export? import = JsonSerializer.Deserialize<Export>(text);
+        if (import is null)
+        {
+            return Results.BadRequest("Something wrong with data");
+        }
+
+        if (!MiniValidator.TryValidate(import, out IDictionary<string, string[]>? errors))
+        {
+            return Results.ValidationProblem(errors);
+        }
+
+        if (import.Scripts.Count == 0 && import.Settings.Count == 0)
+        {
+            return Results.BadRequest("Something wrong with data");
+        }
+
+        await ResetDb(import, app.Services, app.Logger);
+
+        return Results.NoContent();
+    })
+    .WithName("ImportFile")
+    .ProducesValidationProblem()
+    .Produces(StatusCodes.Status204NoContent)
+    .Produces(StatusCodes.Status400BadRequest);
+
+app.MapPost("/api/import/text", async (Export import) =>
+    {
+        if (!MiniValidator.TryValidate(import, out IDictionary<string, string[]>? errors))
+        {
+            return Results.ValidationProblem(errors);
+        }
+
+        await ResetDb(import, app.Services, app.Logger);
+
+        return Results.NoContent();
+    })
+    .WithName("ImportText")
+    .ProducesValidationProblem()
+    .Produces(StatusCodes.Status204NoContent);
+
 app.MapGet("/api/script", async (PageantDb db) => await db.Scripts.ToListAsync())
     .WithName("GetScript")
     .Produces<List<Scripts>>();
@@ -57,6 +133,11 @@ app.MapGet("/api/settings", async (PageantDb db) => await db.Settings.ToListAsyn
 
 app.MapPost("/api/script", async (Scripts script, PageantDb db) =>
     {
+        if (!MiniValidator.TryValidate(script, out IDictionary<string, string[]>? errors))
+        {
+            return Results.ValidationProblem(errors);
+        }
+
         if (string.IsNullOrEmpty(script.Camera1Position))
         {
             script.Camera1Position = string.Empty;
@@ -70,11 +151,6 @@ app.MapPost("/api/script", async (Scripts script, PageantDb db) =>
         if (string.IsNullOrEmpty(script.Camera3Position))
         {
             script.Camera3Position = string.Empty;
-        }
-
-        if (!MiniValidator.TryValidate(script, out IDictionary<string, string[]>? errors))
-        {
-            return Results.ValidationProblem(errors);
         }
 
         Scripts? scriptEntity = await db.Scripts.FirstOrDefaultAsync(s => s.Act == script.Act && s.Scene == script.Scene);
@@ -177,4 +253,35 @@ async Task EnsureDb(IServiceProvider services, ILogger logger)
 
     await using PageantDb db = services.CreateScope().ServiceProvider.GetRequiredService<PageantDb>();
     await db.Database.MigrateAsync();
+}
+
+async Task ResetDb(Export export, IServiceProvider services, ILogger logger)
+{
+    foreach (Scripts script in export.Scripts)
+    {
+        if (string.IsNullOrEmpty(script.Camera1Position))
+        {
+            script.Camera1Position = string.Empty;
+        }
+
+        if (string.IsNullOrEmpty(script.Camera2Position))
+        {
+            script.Camera2Position = string.Empty;
+        }
+
+        if (string.IsNullOrEmpty(script.Camera3Position))
+        {
+            script.Camera3Position = string.Empty;
+        }
+    }
+
+    logger.LogInformation("Resetting database at connection string '{connectionString}'", connectionString);
+
+    await using PageantDb db = services.CreateScope().ServiceProvider.GetRequiredService<PageantDb>();
+    await db.Database.EnsureDeletedAsync();
+    await db.Database.MigrateAsync();
+
+    await db.Scripts.AddRangeAsync(export.Scripts);
+    await db.Settings.AddRangeAsync(export.Settings);
+    await db.SaveChangesAsync();
 }

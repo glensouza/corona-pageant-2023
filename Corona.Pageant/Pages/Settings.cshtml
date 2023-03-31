@@ -12,8 +12,7 @@
     <div class="accordion">
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     OBS
                 </button>
             </h2>
@@ -66,8 +65,7 @@
                     Cameras
                 </button>
             </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
-                 data-bs-parent="#accordionExample">
+            <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <div class="mb-3 row">
                         <label for="ipCam1" class="form-label col-sm-2">Camera 1</label>
@@ -99,9 +97,28 @@
                 </div>
             </div>
         </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    Import/Export
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="mb-3 row">
+                        <div class="col-sm-6">
+                            <label for="importFile" class="btn btn-primary">Select File to Import</label>
+                            <input type="file" id="importFile" style="display:none" accept=".json"/>
+                        </div>
+                        <div class="col-sm-4">
+                            <button id="prepareExport" class="btn btn-success">Prepare Export</button>
+                            <div id="export"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
 
 @section scripts{
     <script src="settings.js"></script>

@@ -18,6 +18,9 @@ var settings = (function () {
     var ipCam1Save = null;
     var ipCam2Save = null;
     var ipCam3Save = null;
+    var exportPrepare = null;
+    var exportDiv = null;
+    var importFile = null;
 
     const obs = new OBSWebSocket();
     obs.on('ConnectionOpened', () => {
@@ -59,11 +62,73 @@ var settings = (function () {
         ipCam2Save.click({ camera: "2" }, saveCameraIp);
         ipCam3Save = $("#ipCam3Save");
         ipCam3Save.click({ camera: "3" }, saveCameraIp);
+        exportPrepare = $("#prepareExport");
+        exportPrepare.click(prepareExport);
+        exportDiv = $("#export");
+        importFile = $("#importFile");
+        importFile.on('change', fileUploaded);
 
         // addCategoryButton.click(addCategory);
         getSettings();
         obs.connect({ address: "localhost:4444" });
     };
+
+    function fileUploaded() {
+        // TODO: Upload File from importFile
+        debugger;
+        var formData = new FormData();
+        formData.append('file', importFile[0].files[0]);
+        $.ajax({
+               url : '/api/import/file',
+               type : 'POST',
+               data : formData,
+               processData: false,  // tell jQuery not to process the data
+               contentType: false,  // tell jQuery not to set contentType
+               success : function() {
+                   debugger;
+                   importFile.val('');
+               }
+            });
+    }
+
+    function prepareExport() {
+        exportPrepare.hide();
+        showLoading();
+        $.ajax({
+            type: 'GET',
+            url: '/api/export',
+            success: function (result, status, xhr) {
+                showLoading();
+                var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result, undefined, 2));
+                var a = document.createElement('a');
+                a.href = 'data:' + data;
+                a.download = 'export.json';
+                a.innerHTML = 'Download Export';
+                a.classList.add('btn');
+                a.classList.add('btn-warning');
+                a.addEventListener('click', () => {
+                    setTimeout(() => {
+                        exportPrepare.show();
+                        exportDiv.empty();
+                    }, 250);
+                });
+                exportDiv.append(a);
+                hideLoading();
+            },
+            error: function (xhr, status, error) {
+                let errorMessage = `${xhr.status} ${status} `;
+                if (status !== xhr.statusText) {
+                    errorMessage += `(${xhr.statusText}) `;
+                }
+                errorMessage += `getting exports: ${xhr.responseJSON ? xhr.responseJSON.message : xhr.responseText}. Please try again later`;
+                console.error(errorMessage);
+            },
+            complete: function () {
+                hideLoading();
+            }
+        });
+
+    }
 
     function saveCameraIp(camera) {
         showLoading();
