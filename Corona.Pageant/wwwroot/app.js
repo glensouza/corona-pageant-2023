@@ -210,7 +210,6 @@ var pageant = (function () {
                     var table = '<table class="table table-striped table-bordered table-hover table-sm">';
                     table += '<tr><th>Setting</th><th>Action</th><th>Position</th></tr>';
                     table += '<tr><td>Scene</td><td>' + script.switchToScene + '</td><td></td></tr>';
-                    debugger;
                     table += '<tr><td>Cam 1</td><td>' + script.camera1Action + '</td><td>' + script.camera1Position + '</td></tr>';
                     table += '<tr><td>Cam 2</td><td>' + script.camera2Action + '</td><td>' + script.camera2Position + '</td></tr>';
                     table += '<tr><td>Cam 3</td><td>' + script.camera3Action + '</td><td>' + script.camera3Position + '</td></tr>';

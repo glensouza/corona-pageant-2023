@@ -1,9 +1,7 @@
 using Corona.Pageant.Database;
 using Corona.Pageant.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MiniValidation;
-using System.Text;
 using System.Text.Json;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -16,8 +14,6 @@ builder.Services.AddSwaggerGen();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
-builder.Services.ConfigureHttpJsonOptions(options => options.SerializerOptions.PropertyNameCaseInsensitive = true);
 
 WebApplication app = builder.Build();
 
@@ -67,14 +63,12 @@ app.MapPost("/api/import/file", async (IFormFile file) =>
         StreamReader reader = new(stream);
         string text = await reader.ReadToEndAsync();
 
-        //JsonSerializerOptions options = new()
-        //{
-        //    //PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        //    PropertyNameCaseInsensitive = true
-        //};
+        JsonSerializerOptions options = new()
+        {
+            PropertyNameCaseInsensitive = true
+        };
 
-        //Export? import = JsonSerializer.Deserialize<Export>(text, options);
-        Export? import = JsonSerializer.Deserialize<Export>(text);
+        Export? import = JsonSerializer.Deserialize<Export>(text, options);
         if (import is null)
         {
             return Results.BadRequest("Something wrong with data");
@@ -259,20 +253,9 @@ async Task ResetDb(Export export, IServiceProvider services, ILogger logger)
 {
     foreach (Scripts script in export.Scripts)
     {
-        if (string.IsNullOrEmpty(script.Camera1Position))
-        {
-            script.Camera1Position = string.Empty;
-        }
-
-        if (string.IsNullOrEmpty(script.Camera2Position))
-        {
-            script.Camera2Position = string.Empty;
-        }
-
-        if (string.IsNullOrEmpty(script.Camera3Position))
-        {
-            script.Camera3Position = string.Empty;
-        }
+        script.Camera1Position ??= string.Empty;
+        script.Camera2Position ??= string.Empty;
+        script.Camera3Position ??= string.Empty;
     }
 
     logger.LogInformation("Resetting database at connection string '{connectionString}'", connectionString);

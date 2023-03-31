@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  api:
+  web:
     container_name: coronapageant
     image: glenster75/coronapageant
     environment:

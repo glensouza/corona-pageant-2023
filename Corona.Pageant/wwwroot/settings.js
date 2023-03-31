@@ -75,7 +75,6 @@ var settings = (function () {
 
     function fileUploaded() {
         // TODO: Upload File from importFile
-        debugger;
         var formData = new FormData();
         formData.append('file', importFile[0].files[0]);
         $.ajax({
@@ -85,7 +84,6 @@ var settings = (function () {
                processData: false,  // tell jQuery not to process the data
                contentType: false,  // tell jQuery not to set contentType
                success : function() {
-                   debugger;
                    importFile.val('');
                }
             });
