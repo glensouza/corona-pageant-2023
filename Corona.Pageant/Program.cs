@@ -108,7 +108,7 @@ app.MapPost("/api/import/text", async (Export import) =>
     .ProducesValidationProblem()
     .Produces(StatusCodes.Status204NoContent);
 
-app.MapGet("/api/script", async (PageantDb db) => await db.Scripts.ToListAsync())
+app.MapGet("/api/script", async (PageantDb db) => await db.Scripts.OrderBy(s => s.Act).ThenBy(s => s.Scene).ToListAsync())
     .WithName("GetScript")
     .Produces<List<Scripts>>();
 
@@ -262,6 +262,7 @@ async Task ResetDb(Export export, IServiceProvider services, ILogger logger)
 
     await using PageantDb db = services.CreateScope().ServiceProvider.GetRequiredService<PageantDb>();
     await db.Database.EnsureDeletedAsync();
+    await db.Database.ExecuteSqlRawAsync("VACUUM;");
     await db.Database.MigrateAsync();
 
     await db.Scripts.AddRangeAsync(export.Scripts);
