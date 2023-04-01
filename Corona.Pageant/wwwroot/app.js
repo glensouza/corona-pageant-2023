@@ -3,7 +3,6 @@ var pageant = (function () {
     var loading = [];
     var pageantLoading = null;
     var pageantMain = null;
-    var functionKey = "";
     var settingObsComputerScene = "";
     var settingObsCam1Scene = "";
     var settingObsCam2Scene = "";
@@ -27,17 +26,8 @@ var pageant = (function () {
     var scriptModal = null;
 
     const obs = new OBSWebSocket();
-    obs.on('ConnectionOpened', () => {
-        showLoading();
-        obs.send('GetSceneList').then(data => {
-            $.each(data.scenes, function (index, scene) {
-                obsScenes.push(scene.name);
-            });
-            hideLoading();
-        })
-    });
 
-    const initialize = function () {
+    const initialize = async function () {
         pageantLoading = $("#pageantLoading");
         pageantMain = $("#pageantMain");
         scriptAct = $("#act");
@@ -91,7 +81,26 @@ var pageant = (function () {
         })
 
         getSettings();
-        obs.connect({ address: "localhost:4444" });
+        try {
+            showLoading();
+            await obs.connect('ws://localhost:4444').then((info) => {
+                console.log('Connected and identified', info)
+            }, () => {
+                console.error('Error Connecting')
+            });
+            await obs.call('GetSceneList').then(data => {
+                $.each(data.scenes, function (index, scene) {
+                    obsScenes.push(scene.sceneName);
+                });
+                hideLoading();
+            }, () => {
+                hideLoading();
+                console.error('Error Connecting')
+            });
+        } catch (error) {
+            hideLoading();
+            console.error('Failed to connect', error.code, error.message);
+        }
     };
 
     function showLoading() {
@@ -132,19 +141,27 @@ var pageant = (function () {
         var act = scriptAct.val();
         var scene = scriptScene.val();
         showLoading();
+        const newScene =
+        {
+            act: act,
+            scene: scene,
+            text: scriptText.val(),
+            camera1Action: scriptCamera1Action.val(),
+            camera1Position: scriptCamera1Position.val(),
+            camera2Action: scriptCamera2Action.val(),
+            camera2Position: scriptCamera2Position.val(),
+            camera3Action: scriptCamera3Action.val(),
+            camera3Position: scriptCamera3Position.val(),
+            switchToScene: scriptSwitchToScene.val()
+        };
         $.ajax({
-            data: {
-                text: scriptText.val(),
-                camera1Action: scriptCamera1Action.val(),
-                camera1Position: scriptCamera1Position.val(),
-                camera2Action: scriptCamera2Action.val(),
-                camera2Position: scriptCamera2Position.val(),
-                camera3Action: scriptCamera3Action.val(),
-                camera3Position: scriptCamera3Position.val(),
-                switchToScene: scriptSwitchToScene.val()
-            },
+            data: JSON.stringify(newScene),
             type: 'POST',
-            url: '/api/script/' + act + '/' + scene + '?code=' + functionKey,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            dataType: 'json',
+            url: '/api/script',
             success: function (result) {
                 location.reload(true);
             },
@@ -181,7 +198,7 @@ var pageant = (function () {
         }
 
         if (obsScene !== "") {
-            obs.send('SetCurrentScene', { 'scene-name': obsScene }).then(data => { console.log(data); });
+            obs.call('SetCurrentProgramScene', { sceneName: obsScene });
         }
 
         if (tempScene.camera1Action === "prepare") {
@@ -201,7 +218,7 @@ var pageant = (function () {
         showLoading();
         $.ajax({
             type: 'GET',
-            url: '/api/script?code=' + functionKey,
+            url: '/api/script',
             success: function (result, status, xhr) {
                 fullScript = result;
                 $.each(result, function (index, script) {

@@ -7,11 +7,11 @@
       "text": "Who but You \nCould breathe and leave a trail of galaxies\nAnd dream of me?\nWhat kind of love\nIs writing my story till the end\nWith mercy's pen?\nOnly you",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 2,
@@ -33,11 +33,11 @@
       "text": "Who could speak\nAnd send the demons back from where they came\nWith just one name?\nWhat other heart\nWould let itself to be broken every time\nUntil he healed mine?\nYou, only you\nCould turn my darkness into dawn\nRunning right into your arms",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 4,
@@ -852,11 +852,11 @@
       "text": "The gates and doors were barred, and all the windows fastened down,\nI spent the night in sleeplessness and rose at every sound,\nHalf in hopeless sorrow half in fear the day,\nWould find the soldiers breaking through to drag us all away.\nThen just before the sunrise I heard something at the wall,\nThe gate began to rattle and a voice began to call,\nI hurried to the window, I looked down to the street,\nExpecting swords and torches and the sound of soldier’s feet,",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 67,
@@ -865,11 +865,11 @@
       "text": "But there was no one there but Mary so I went down to let her in,\nJohn stood there beside me as she told us were she'd been,\nShe said they moved him in the night and none of us knows where,\nThe stones been rolled away and now his body isn't there.\nWe both ran toward the garden then John ran on ahead,\nWe found the stone and the empty tomb just the way that Mary said,\nBut the winding sheet they wrapped him in was just an empty shell,\nAnd how or where they'd taken him was more than I could tell.",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 68,
@@ -878,11 +878,11 @@
       "text": "Something strange had happened there but what I did not know,\nJohn believed a miracle but I just turned to go,\nCircumstance and speculation couldn't lift me very high,\nCause I'd seen them crucify him and then I saw him die,\nBack inside the house again all the guilt and anguish came,\nEverything I'd promised him just added to my shame,\nBut at last it came to choices I denied I knew his name,\nSo even If he was alive it could never be the same.",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 69,
@@ -891,11 +891,11 @@
       "text": "But suddenly the air was filled with a strange and sweet perfume,\nLight that came from everywhere drove shadows from the room,\nJesus stood before me with his arms held open wide,\nAnd I fell down on my knees and clung to him and cried,\nHe raised me to my feet and as I looked into his eyes,\nLove was shining out from him like sunlight from the sky,\nGuilt and my confusion disappeared in sweet release,\nAnd every fear I'd ever had just melted into peace.",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 70,
@@ -904,11 +904,11 @@
       "text": "Alive, Alive, He’s alive, Alive, Alive, He’s Alive, He’s Alive",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 71,
@@ -917,11 +917,11 @@
       "text": "He's alive, He's alive, He's alive and I'm forgiven,\nHeavens gates are open wide.\nHe's alive, He's alive, He's alive and I'm forgiven,\nHeavens gates are open wide.\nHe's alive, He's alive, He's alive and I'm forgiven,\nHeavens gates are open wide.\nHe's alive!",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 72,
@@ -930,11 +930,11 @@
       "text": "All authority in heaven and earth has been given to me. Wherever you go, make disciples of all people: baptize them in the name of the Father, Son and Holy Spirit. Teach them to do everything I have commanded you. And remember, I am always with you until the end of time. Tell them that those who overcome will be given the right to eat from the tree of life, which is in the midst of the paradise of God.",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 73,
@@ -943,11 +943,11 @@
       "text": "Tell people they will never need to be ashamed of the gospel, for it is the power of God for the salvation of everyone who believes. It is the gospel that reveals a righteousness that is by faith from beginning to end. For it is written, the righteous will live by faith. Remind them that those who overcome will be clothed in white garments and I will acknowledge their character before my Father and His angels.",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 74,
@@ -956,11 +956,11 @@
       "text": "Cover the earth with the good news of the gospel. Call people from every nation to worship God. Announce the time has come for Him to judge all people. Invite them to experience my rest of salvation as they worship the Creator of heaven, the creator earth, the sea and the springs of water. Tell them that those who are victorious will sit beside me on my throne and reign with me just as I was victorious and sat with my Father on His throne.",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 75,
@@ -969,11 +969,11 @@
       "text": "VIDEO",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 76,
@@ -982,11 +982,11 @@
       "text": "The sky shall unfold\nPreparing His entrance\nThe stars shall applaud Him\nWith thunders of praise",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 77,
@@ -995,11 +995,11 @@
       "text": "The sweet light in His eyes shall\nShall enhance those awaiting\nAnd we shall behold Him\nThen face to face",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 78,
@@ -1008,11 +1008,11 @@
       "text": "We shall behold Him\nYes, we shall behold Him\nFace to face in all of His Glory",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 79,
@@ -1021,11 +1021,11 @@
       "text": "We shall behold Him\nYes, we shall behold Him\nFace to face our Savior and Lord",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 80,
@@ -1034,11 +1034,11 @@
       "text": "The angels shall sound\nThe shout of His coming\nAnd the sleeping shall rise from\nTheir slumbering place",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 81,
@@ -1047,11 +1047,11 @@
       "text": "And those who remain shall\nWe shall be changed in a moment\nAnd we shall behold Him\nThen face to face",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 82,
@@ -1060,11 +1060,11 @@
       "text": "We shall behold Him\nOh yes, we shall behold Him\nFace to face in all of His Glory",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 83,
@@ -1073,11 +1073,11 @@
       "text": "We shall behold Him\nOh yes, we shall behold Him\nFace to face my Savior and Lord",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     },
     {
       "id": 84,
@@ -1086,11 +1086,11 @@
       "text": "And we shall behold Him\nOur Savior and Lord!\nSavior and Lord!!",
       "switchToScene": "string",
       "camera1Action": "string",
-      "camera1Position": null,
+      "camera1Position": "",
       "camera2Action": "string",
-      "camera2Position": null,
+      "camera2Position": "",
       "camera3Action": "string",
-      "camera3Position": null
+      "camera3Position": ""
     }
   ],
   "settings": [
@@ -1098,13 +1098,49 @@
       "id": 1,
       "settingType": "Camera",
       "settingId": "1",
-      "setting": "111.111"
+      "setting": "10.0.1.101"
     },
     {
       "id": 2,
       "settingType": "OBS",
       "settingId": "aa",
       "setting": "ggg"
+    },
+    {
+      "id": 3,
+      "settingType": "OBS",
+      "settingId": "ComputerScene",
+      "setting": "Screen 2"
+    },
+    {
+      "id": 4,
+      "settingType": "OBS",
+      "settingId": "Cam1Scene",
+      "setting": "Car"
+    },
+    {
+      "id": 5,
+      "settingType": "OBS",
+      "settingId": "Cam2Scene",
+      "setting": "Davin Scene"
+    },
+    {
+      "id": 6,
+      "settingType": "OBS",
+      "settingId": "Cam3Scene",
+      "setting": "Countdown"
+    },
+    {
+      "id": 7,
+      "settingType": "Camera",
+      "settingId": "3",
+      "setting": "10.0.1.98"
+    },
+    {
+      "id": 8,
+      "settingType": "Camera",
+      "settingId": "2",
+      "setting": "10.0.1.100"
     }
   ]
 }

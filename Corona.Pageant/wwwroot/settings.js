@@ -3,7 +3,6 @@ var settings = (function () {
     var loading = [];
     var settingsLoading = null;
     var settingsMain = null;
-    var functionKey = "";
     var settingObsComputerScene = "";
     var settingObsCam1Scene = "";
     var settingObsCam2Scene = "";
@@ -23,18 +22,8 @@ var settings = (function () {
     var importFile = null;
 
     const obs = new OBSWebSocket();
-    obs.on('ConnectionOpened', () => {
-        showLoading();
-        obs.send('GetSceneList').then(data => {
-            $.each(data.scenes, function (index, scene) {
-                obsScenes.push(scene.name);
-            });
-            updateObsDropdowns();
-            hideLoading();
-        })
-    });
 
-    const initialize = function () {
+    const initialize = async function () {
         settingsLoading = $("#settingsLoading");
         settingsMain = $("#settingsMain");
         dropdownObsComputerScene = $("#obsComputer");
@@ -68,13 +57,28 @@ var settings = (function () {
         importFile = $("#importFile");
         importFile.on('change', fileUploaded);
 
-        // addCategoryButton.click(addCategory);
         getSettings();
-        obs.connect({ address: "localhost:4444" });
+        try {
+            showLoading();
+            await obs.connect('ws://localhost:4444').then((info) => {
+                console.log('Connected and identified', info)
+            }, () => {
+                console.error('Error Connecting')
+            });
+            await obs.call('GetSceneList').then(data => {
+                $.each(data.scenes, function (index, scene) {
+                    obsScenes.push(scene.sceneName);
+                });
+                updateObsDropdowns();
+                hideLoading();
+            });
+        } catch (error) {
+            console.error('Failed to connect', error.code, error.message);
+            hideLoading();
+        }
     };
 
     function fileUploaded() {
-        // TODO: Upload File from importFile
         var formData = new FormData();
         formData.append('file', importFile[0].files[0]);
         $.ajax({
@@ -144,10 +148,13 @@ var settings = (function () {
         }
 
         if (newValue !== "") {
+            const newSetting = { setting: newValue, settingType: "Camera", settingId: camera.data.camera };
             $.ajax({
-                data: { ipAddress: newValue },
+                data: JSON.stringify(newSetting),
                 type: 'POST',
-                url: '/api/camera/' + camera.data.camera + '?code=' + functionKey,
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                url: '/api/camera/' + camera.data.camera,
                 success: function (result) { },
                 error: function (xhr, status, error) {
                     let errorMessage = `${xhr.status} ${status} `;
@@ -181,10 +188,13 @@ var settings = (function () {
         }
 
         if (newValue !== "") {
+            const newSetting = { setting: newValue, settingType: "OBS", settingId: scene.data.scene };
             $.ajax({
-                data: { scene: newValue },
+                data: JSON.stringify(newSetting),
                 type: 'POST',
-                url: '/api/obs/' + scene.data.scene + '?code=' + functionKey,
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                url: '/api/obs/' + scene.data.scene,
                 success: function (result) {
                     switch (scene.data.scene) {
                         case "ComputerScene":
@@ -228,7 +238,7 @@ var settings = (function () {
         }
     }
 
-    function showObsScene(sceneName) {
+    async function showObsScene(sceneName) {
         var scene = "";
         switch (sceneName.data.scene) {
             case "ComputerScene":
@@ -246,7 +256,7 @@ var settings = (function () {
         }
 
         if (scene !== "") {
-            obs.send('SetCurrentScene', { 'scene-name': scene }).then(data => { console.log(data); });
+            await obs.call('SetCurrentProgramScene', { sceneName: scene }).then(data => { console.log(data); });
         }
     }
 
