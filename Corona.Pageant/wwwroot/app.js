@@ -201,16 +201,34 @@ var pageant = (function () {
             obs.call('SetCurrentProgramScene', { sceneName: obsScene });
         }
 
+        function runActionAPI(camIP, camPosition) {
+            $.ajax({
+                type: 'GET',
+                url: '/api/runAction/' + camIP + '/' + camPosition,
+                success: function (result, status, xhr) {
+                    console.log("success running camera " + camIP + " position " + camPosition + " action");
+                },
+                error: function (xhr, status, error) {
+                    let errorMessage = `${xhr.status} ${status} `;
+                    if (status !== xhr.statusText) {
+                        errorMessage += `(${xhr.statusText}) `;
+                    }
+                    errorMessage += `running camera ${camIP} position ${camPosition} action: ${xhr.responseJSON ? xhr.responseJSON.message : xhr.responseText}. Please try again later`;
+                    console.error(errorMessage);
+                }
+            });
+        }
+
         if (tempScene.camera1Action === "prepare") {
-            setTimeout(function () { $.get("http://" + settingCam1IP + "/cgi-bin/ptzctrl.cgi?ptzcmd&poscall&" + tempScene.camera1Position, function (data) { console.log(data); }); }, 3000);
+            setTimeout(runActionAPI(settingCam1IP, tempScene.camera1Position), 3000);
         }
 
         if (tempScene.camera2Action === "prepare") {
-            setTimeout(function () { $.get("http://" + settingCam2IP + "/cgi-bin/ptzctrl.cgi?ptzcmd&poscall&" + tempScene.camera2Position, function (data) { console.log(data); }); }, 3000);
+            setTimeout(runActionAPI(settingCam2IP, tempScene.camera2Position), 3000);
         }
 
         if (tempScene.camera3Action === "prepare") {
-            setTimeout(function () { $.get("http://" + settingCam3IP + "/cgi-bin/ptzctrl.cgi?ptzcmd&poscall&" + tempScene.camera3Position, function (data) { console.log(data); }); }, 3000);
+            setTimeout(runActionAPI(settingCam3IP, tempScene.camera3Position), 3000);
         }
     }
 
@@ -241,7 +259,7 @@ var pageant = (function () {
                 if (status !== xhr.statusText) {
                     errorMessage += `(${xhr.statusText}) `;
                 }
-                errorMessage += `getting intents for category ${selectedCategory}: ${xhr.responseJSON ? xhr.responseJSON.message : xhr.responseText}. Please try again later`;
+                errorMessage += `getting scripts: ${xhr.responseJSON ? xhr.responseJSON.message : xhr.responseText}. Please try again later`;
                 console.error(errorMessage);
             },
             complete: hideLoading
@@ -296,7 +314,7 @@ var pageant = (function () {
                 if (status !== xhr.statusText) {
                     errorMessage += `(${xhr.statusText}) `;
                 }
-                errorMessage += `getting intents for category ${selectedCategory}: ${xhr.responseJSON ? xhr.responseJSON.message : xhr.responseText}. Please try again later`;
+                errorMessage += `getting settings: ${xhr.responseJSON ? xhr.responseJSON.message : xhr.responseText}. Please try again later`;
                 console.error(errorMessage);
             },
             complete: hideLoading

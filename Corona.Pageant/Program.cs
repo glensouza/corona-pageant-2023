@@ -1,3 +1,4 @@
+using System.Net;
 using Corona.Pageant.Database;
 using Corona.Pageant.Models;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,25 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.MapGet("/api/runAction/{ipAddress}/{position}", async (string ipAddress, string position) =>
+    {
+        try
+        {
+            using HttpClient client = new();
+            await client.GetAsync($"http://{ipAddress}/cgi-bin/ptzctrl.cgi?ptzcmd&poscall&{position}");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return Results.NoContent();
+    })
+    .WithName("RunAction")
+    .Produces(StatusCodes.Status204NoContent)
+    .Produces(StatusCodes.Status500InternalServerError);
 
 app.MapGet("/api/export", async (PageantDb db) =>
     {
