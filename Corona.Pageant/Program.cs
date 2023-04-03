@@ -4,6 +4,8 @@ using Corona.Pageant.Models;
 using Microsoft.EntityFrameworkCore;
 using MiniValidation;
 using System.Text.Json;
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.SignalR;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -12,13 +14,27 @@ builder.Services.AddSqlite<PageantDb>(connectionString)
     .AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSignalR();
+builder.Services.AddResponseCompression(opts =>
+{
+    opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+        new[] { "application/octet-stream" });
+});
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.AddCors(options => options.AddPolicy("ApiCorsPolicy", corsBuilder =>
+{
+    corsBuilder.WithOrigins(builder.Configuration["ViewerSource"]).AllowAnyMethod().AllowAnyHeader();
+}));
+
 WebApplication app = builder.Build();
 
 await EnsureDb(app.Services, app.Logger);
+
+app.UseResponseCompression();
+app.UseCors("ApiCorsPolicy");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -31,6 +47,8 @@ if (!app.Environment.IsDevelopment())
 app.MapSwagger();
 app.UseSwaggerUI();
 
+app.MapHub<PageantHub>("/reminder");
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -39,6 +57,15 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.MapHub<PageantHub>("/pageantHub");
+
+app.MapPost("/api/navigate/{act}/{scene}", async (string act, string scene, IHubContext<PageantHub> context) =>
+    {
+        await context.Clients.All.SendAsync("Navigate", $"{{ act: '{act}', scene: '{scene}' }}");
+    })
+    .WithName("Navigate")
+    .Produces(StatusCodes.Status204NoContent);
 
 app.MapGet("/api/runAction/{ipAddress}/{position}", async (string ipAddress, string position) =>
     {
