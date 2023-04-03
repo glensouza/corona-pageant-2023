@@ -11,3 +11,6 @@ Web:
 <http://localhost>
 
 docker-compose pull && docker-compose up -d
+
+containerizing blazor webassembly app
+<https://chrissainty.com/containerising-blazor-applications-with-docker-containerising-a-blazor-webassembly-app/>
