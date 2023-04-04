@@ -1,7 +1,37 @@
-@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 html, body {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background-color: #fff;
+    min-height: 75rem;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#app {
+    margin-top: 50px;
+}
+
+.container {
+    margin: auto;
+    width: 50%;
+    padding: 20px;
+}
+
+.navCurrent {
+    border: solid;
+    background-color: lightyellow;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+#switchToScene {
+    width: 250px;
 }
 
 h1:focus {

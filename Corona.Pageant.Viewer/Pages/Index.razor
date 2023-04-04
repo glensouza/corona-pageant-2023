@@ -1,32 +1,74 @@
 ﻿@page "/"
+@inject HttpClient Http
 @using Microsoft.AspNetCore.SignalR.Client
+@using System.Text.Json
+@using Corona.Pageant.Shared
 @inject IConfiguration Configuration
 @implements IAsyncDisposable
 
-<PageTitle>Reminders</PageTitle>
-<h1>Reminders</h1>
-<ul id="messagesList">
-    @foreach (string reminder in reminders)
-    {
-        <li>@reminder</li>
-    }
-</ul>
+<div id="pageantMain">
+    <h1>Passion and Resurrection Pageant</h1>
+    <div id="theScript">
+        @foreach (Scripts tempScript in script)
+        {
+            <div id="@(tempScript.Act.Replace(" ", ""))_@(tempScript.Scene.Replace(" ", ""))" class="@tempScript.NavClass">
+                <h2 class="mt-4">Act @tempScript.Act<br />Scene @tempScript.Scene</h2>
+                <div class="row mb-3">
+                    <div class="col-md-8 themed-grid-col" style="white-space: pre-line">@tempScript.Text</div>
+                    <div class="col-md-4 themed-grid-col">
+                        <table class="table table-striped table-bordered table-hover table-sm">
+                            <tr><th>Lighting</th><th>Action</th></tr>
+                            <tr><td>Spotlight Left</td><td>@tempScript.SpotlightLeft</td></tr>
+                            <tr><td>Spotlight Right</td><td>@tempScript.SpotlightRight</td></tr>
+                            <tr><td>Stage Scene</td><td>@tempScript.StageLightScene</td></tr>
+                            <tr><td>House Lights</td><td>@tempScript.HouseLights</td></tr>
+                        </table>
+                        <p>@tempScript.LightingNotes</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
 @code {
     private HubConnection? hubConnection;
-    private List<string> reminders = new();
+    private string apiLocation = string.Empty;
+    private List<Scripts> script = new();
 
     protected override async Task OnInitializedAsync()
     {
+
+        this.apiLocation = Configuration["apiLocation"] ?? throw new InvalidOperationException();
+
+        script = await Http.GetFromJsonAsync<List<Scripts>>($"{apiLocation}/api/script") ?? new List<Scripts>();
+
         hubConnection = new HubConnectionBuilder()
-            //.WithUrl($"{Configuration["apiLocation"]}/api/pageantHub")
-            .WithUrl("http://localhost:5171/api/pageantHub")
+            .WithUrl($"{apiLocation}/api/pageantHub")
             .WithAutomaticReconnect()
             .Build();
 
         hubConnection.On<string>("Navigate", (message) =>
         {
-            string encodedMsg = $"{message}";
-            reminders.Add(encodedMsg);
+            try
+            {
+                Navigate? nav = JsonSerializer.Deserialize<Navigate>(message);
+                foreach (Scripts scriptWithNav in script.Where(s => !string.IsNullOrEmpty(s.NavClass)))
+                {
+                    scriptWithNav.NavClass = string.Empty;
+                }
+
+                Scripts? scriptToAddNav = script.FirstOrDefault(s => s.Act == nav?.Act && s.Scene == nav.Scene);
+                if (scriptToAddNav != null)
+                {
+                    scriptToAddNav.NavClass = "navCurrent";
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
             StateHasChanged();
         });
 

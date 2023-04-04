@@ -21,6 +21,11 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Corona.Pageant.Shared\Corona.Pageant.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

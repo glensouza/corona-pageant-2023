@@ -1,11 +1,19 @@
 version: '3'
 
 services:
+  viewer:
+    container_name: coronapageantviewer
+    image: glenster75/coronapageantviewer
+    environment:
+      - TZ=America/Los_Angeles
+    ports:
+      - '80:80'
+    restart: unless-stopped
   web:
     container_name: coronapageant
     image: glenster75/coronapageant
     environment:
       - TZ=America/Los_Angeles
     ports:
-      - '80:80'
+      - '81:80'
     restart: unless-stopped

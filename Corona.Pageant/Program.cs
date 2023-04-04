@@ -1,11 +1,11 @@
-using System.Net;
 using Corona.Pageant.Database;
-using Corona.Pageant.Models;
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using MiniValidation;
 using System.Text.Json;
-using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.AspNetCore.SignalR;
+using Corona.Pageant.Hubs;
+using Corona.Pageant.Shared;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -26,8 +26,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddCors(options => options.AddPolicy("ApiCorsPolicy", corsBuilder =>
 {
-    //corsBuilder.WithOrigins(builder.Configuration["ViewerSource"]).AllowAnyMethod().AllowAnyHeader();
-    corsBuilder.WithOrigins("http://localhost:5172").AllowAnyMethod().AllowAnyHeader();
+    corsBuilder.WithOrigins(builder.Configuration["ViewerSource"] ?? throw new InvalidOperationException()).AllowAnyMethod().AllowAnyHeader();
 }));
 
 WebApplication app = builder.Build();
@@ -61,7 +60,9 @@ app.MapRazorPages();
 
 app.MapPost("/api/navigate/{act}/{scene}", async (string act, string scene, IHubContext<PageantHub> context) =>
     {
-        await context.Clients.All.SendAsync("Navigate", $"{{ act: '{act}', scene: '{scene}' }}");
+        Navigate nav = new() { Act = act, Scene = scene };
+        string navString = JsonSerializer.Serialize(nav);
+        await context.Clients.All.SendAsync("Navigate", navString);
     })
     .WithName("Navigate")
     .Produces(StatusCodes.Status204NoContent);
@@ -178,20 +179,9 @@ app.MapPost("/api/script", async (Scripts script, PageantDb db) =>
             return Results.ValidationProblem(errors);
         }
 
-        if (string.IsNullOrEmpty(script.Camera1Position))
-        {
-            script.Camera1Position = string.Empty;
-        }
-
-        if (string.IsNullOrEmpty(script.Camera2Position))
-        {
-            script.Camera2Position = string.Empty;
-        }
-
-        if (string.IsNullOrEmpty(script.Camera3Position))
-        {
-            script.Camera3Position = string.Empty;
-        }
+        script.Camera1Position ??= string.Empty;
+        script.Camera2Position ??= string.Empty;
+        script.Camera3Position ??= string.Empty;
 
         Scripts? scriptEntity = await db.Scripts.FirstOrDefaultAsync(s => s.Act == script.Act && s.Scene == script.Scene);
         if (scriptEntity is null)

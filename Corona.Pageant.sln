@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFi
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corona.Pageant.Shared", "Corona.Pageant.Shared\Corona.Pageant.Shared.csproj", "{89A491E1-16CA-40D3-AC18-E0695EB15A55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{98D7E40A-4E79-4694-91D1-70AAF1ED776F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98D7E40A-4E79-4694-91D1-70AAF1ED776F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98D7E40A-4E79-4694-91D1-70AAF1ED776F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89A491E1-16CA-40D3-AC18-E0695EB15A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89A491E1-16CA-40D3-AC18-E0695EB15A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89A491E1-16CA-40D3-AC18-E0695EB15A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89A491E1-16CA-40D3-AC18-E0695EB15A55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,7 @@
 using Corona.Pageant.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Corona.Pageant.Migrations
 {
     [DbContext(typeof(PageantDb))]
-    partial class PageantDbModelSnapshot : ModelSnapshot
+    [Migration("20230404141706_NewLightFields")]
+    partial class NewLightFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
@@ -48,9 +51,6 @@ namespace Corona.Pageant.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("HouseLights")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LightingNotes")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NavClass")

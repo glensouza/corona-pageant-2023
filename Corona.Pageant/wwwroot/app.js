@@ -156,9 +156,7 @@ var pageant = (function () {
         };
         $.ajax({
             data: JSON.stringify(newScene),
-            type: 'POST',
             contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
             type: 'POST',
             dataType: 'json',
             url: '/api/script',
@@ -178,6 +176,21 @@ var pageant = (function () {
     }
 
     function runAction(act, scene) {
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            url: '/api/navigate/' + act + '/' + scene,
+            error: function (xhr, status, error) {
+                let errorMessage = `${xhr.status} ${status} `;
+                if (status !== xhr.statusText) {
+                    errorMessage += `(${xhr.statusText}) `;
+                }
+                errorMessage += `: updating current nave ${xhr.responseJSON ? xhr.responseJSON.message : xhr.responseText}. Please try again later`;
+                console.error(errorMessage);
+            }
+        });
+
         var tempScene = $.grep(fullScript, function (a) {
             return a.act === act && a.scene === scene;
         })[0];

@@ -1,4 +1,4 @@
-using Corona.Pageant.Models;
+using Corona.Pageant.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace Corona.Pageant.Database;
