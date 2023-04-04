@@ -26,7 +26,8 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddCors(options => options.AddPolicy("ApiCorsPolicy", corsBuilder =>
 {
-    corsBuilder.WithOrigins(builder.Configuration["ViewerSource"]).AllowAnyMethod().AllowAnyHeader();
+    //corsBuilder.WithOrigins(builder.Configuration["ViewerSource"]).AllowAnyMethod().AllowAnyHeader();
+    corsBuilder.WithOrigins("http://localhost:5172").AllowAnyMethod().AllowAnyHeader();
 }));
 
 WebApplication app = builder.Build();
@@ -47,7 +48,7 @@ if (!app.Environment.IsDevelopment())
 app.MapSwagger();
 app.UseSwaggerUI();
 
-app.MapHub<PageantHub>("/reminder");
+app.MapHub<PageantHub>("/api/pageantHub");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -57,8 +58,6 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
-app.MapHub<PageantHub>("/pageantHub");
 
 app.MapPost("/api/navigate/{act}/{scene}", async (string act, string scene, IHubContext<PageantHub> context) =>
     {

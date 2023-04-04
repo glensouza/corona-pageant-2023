@@ -19,11 +19,11 @@
     {
         hubConnection = new HubConnectionBuilder()
             //.WithUrl($"{Configuration["apiLocation"]}/api/pageantHub")
-            .WithUrl("http://localhost:5071/api/pageantHub")
+            .WithUrl("http://localhost:5171/api/pageantHub")
             .WithAutomaticReconnect()
             .Build();
 
-        hubConnection.On<string>("ReceiveMessage", (message) =>
+        hubConnection.On<string>("Navigate", (message) =>
         {
             string encodedMsg = $"{message}";
             reminders.Add(encodedMsg);

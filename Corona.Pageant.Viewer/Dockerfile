@@ -6,7 +6,7 @@ COPY ./Corona.Pageant.Viewer .
 RUN dotnet build Corona.Pageant.Viewer.csproj -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish Corona.Pageant.Viewer.csproj -c Release -o /app/publish
+RUN dotnet publish ./Corona.Pageant.Viewer/Corona.Pageant.Viewer.csproj -c Release -o /app/publish
 
 FROM nginx:alpine AS final
 WORKDIR /usr/share/nginx/html

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Corona.Pageant", "Corona.Pageant\Corona.Pageant.csproj", "{E4958944-CAEF-46A8-8CD4-3C64BD65E179}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corona.Pageant.Viewer", "Corona.Pageant.Viewer\Corona.Pageant.Viewer.csproj", "{98D7E40A-4E79-4694-91D1-70AAF1ED776F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Corona.Pageant.Viewer", "Corona.Pageant.Viewer\Corona.Pageant.Viewer.csproj", "{98D7E40A-4E79-4694-91D1-70AAF1ED776F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFiles", "{EC108EF1-08E3-4E84-A375-7CC53F6A4515}"
 	ProjectSection(SolutionItems) = preProject
@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFi
 		.gitignore = .gitignore
 		docker-compose.yml = docker-compose.yml
 		README.md = README.md
-		.github\workflows\viewer-docker-publish.yml = .github\workflows\viewer-docker-publish.yml
-		.github\workflows\web-docker-publish.yml = .github\workflows\web-docker-publish.yml
 	EndProjectSection
 EndProject
 Global
