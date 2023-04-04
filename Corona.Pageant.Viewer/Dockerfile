@@ -8,4 +8,4 @@ RUN dotnet publish "Corona.Pageant.Viewer.csproj" -c Release -o /app/publish /p:
 FROM nginx:alpine AS final
 WORKDIR /usr/share/nginx/html
 COPY --from=build /app/publish/wwwroot .
-COPY ["nginx.conf", "/etc/nginx/nginx.conf"]
+COPY nginx.conf /etc/nginx/nginx.conf
