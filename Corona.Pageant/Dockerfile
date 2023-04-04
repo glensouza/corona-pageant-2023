@@ -1,19 +1,12 @@
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
-WORKDIR /app
-EXPOSE 80
-
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Corona.Pageant/Corona.Pageant.csproj", "Corona.Pageant/"]
-RUN dotnet restore "Corona.Pageant/Corona.Pageant.csproj"
 COPY . .
-WORKDIR "/src/Corona.Pageant"
+RUN dotnet restore "Corona.Pageant.csproj"
 RUN dotnet build "Corona.Pageant.csproj" -c Release -o /app/build
-
-FROM build AS publish
 RUN dotnet publish "Corona.Pageant.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-FROM base AS final
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
+EXPOSE 80
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "Corona.Pageant.dll"]
