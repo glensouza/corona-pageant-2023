@@ -37,3 +37,16 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  run_onprem:
+    runs-on: self-hosted
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+        
+      - name: Publish latest containers
+        run: |
+          docker rm coronapageant
+          docker rm coronapageantviewer
+          docker-compose pull
+          docker-compose up -d
