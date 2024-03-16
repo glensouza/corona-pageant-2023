@@ -46,6 +46,7 @@ jobs:
         
       - name: Publish latest containers
         run: |
+          security -v unlock-keychain ~/Library/Keychains/login.keychain-db
           docker ps -aq | xargs docker stop | xargs docker rm
           docker-compose pull
           docker-compose up -d
