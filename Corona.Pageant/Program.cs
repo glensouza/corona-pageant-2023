@@ -24,17 +24,22 @@ builder.Services.AddResponseCompression(opts =>
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddCors(options => options.AddPolicy("ApiCorsPolicy", corsBuilder =>
-{
-    corsBuilder.WithOrigins(builder.Configuration["ViewerSource"] ?? throw new InvalidOperationException()).AllowAnyMethod().AllowAnyHeader();
-}));
+//builder.Services.AddCors(options => options.AddPolicy("ApiCorsPolicy", corsBuilder =>
+//{
+//    corsBuilder.WithOrigins(builder.Configuration["ViewerSource"] ?? throw new InvalidOperationException()).AllowAnyMethod().AllowAnyHeader();
+//}));
 
 WebApplication app = builder.Build();
 
 await EnsureDb(app.Services, app.Logger);
 
 app.UseResponseCompression();
-app.UseCors("ApiCorsPolicy");
+//app.UseCors("ApiCorsPolicy");
+
+app.UseCors(x => x.AllowAnyOrigin()
+  .AllowAnyHeader()
+  .AllowAnyMethod()
+);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
