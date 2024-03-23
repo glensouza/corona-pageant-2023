@@ -24,10 +24,10 @@ builder.Services.AddResponseCompression(opts =>
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-//builder.Services.AddCors(options => options.AddPolicy("ApiCorsPolicy", corsBuilder =>
-//{
-//    corsBuilder.WithOrigins(builder.Configuration["ViewerSource"] ?? throw new InvalidOperationException()).AllowAnyMethod().AllowAnyHeader();
-//}));
+builder.Services.AddCors(options => options.AddPolicy("ApiCorsPolicy", corsBuilder =>
+{
+   corsBuilder.WithOrigins(builder.Configuration["ViewerSource"] ?? throw new InvalidOperationException()).AllowAnyMethod().AllowAnyHeader();
+}));
 
 // builder.Services.AddCors(options =>
 // {
@@ -45,7 +45,7 @@ await EnsureDb(app.Services, app.Logger);
 
 app.UseResponseCompression();
 
-// app.UseCors("ApiCorsPolicy");
+app.UseCors("ApiCorsPolicy");
 
 //app.UseCors(x => x.AllowAnyOrigin()
 //  .AllowAnyHeader()
@@ -53,13 +53,13 @@ app.UseResponseCompression();
 //);
 
 // CORS - Allow calling the API from WebBrowsers
-app.UseCors(x => x
-  .AllowAnyMethod()
-  .AllowAnyHeader()
-  .AllowCredentials()
-  //.WithOrigins("https://localhost:44351")); // Allow only this origin can also have multiple origins seperated with comma
-  .SetIsOriginAllowed(origin => true) // Allow any origin
-);
+// app.UseCors(x => x
+//   .AllowAnyMethod()
+//   .AllowAnyHeader()
+//   .AllowCredentials()
+//   //.WithOrigins("https://localhost:44351")); // Allow only this origin can also have multiple origins seperated with comma
+//   .SetIsOriginAllowed(origin => true) // Allow any origin
+// );
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
