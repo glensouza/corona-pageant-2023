@@ -29,17 +29,27 @@ builder.Services.AddRazorPages();
 //    corsBuilder.WithOrigins(builder.Configuration["ViewerSource"] ?? throw new InvalidOperationException()).AllowAnyMethod().AllowAnyHeader();
 //}));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ApiCorsPolicy", policy =>
+    {
+        policy.WithOrigins(allowedOrigin)
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+    });
+});
+
 WebApplication app = builder.Build();
 
 await EnsureDb(app.Services, app.Logger);
 
 app.UseResponseCompression();
-//app.UseCors("ApiCorsPolicy");
+app.UseCors("ApiCorsPolicy");
 
-app.UseCors(x => x.AllowAnyOrigin()
-  .AllowAnyHeader()
-  .AllowAnyMethod()
-);
+//app.UseCors(x => x.AllowAnyOrigin()
+//  .AllowAnyHeader()
+//  .AllowAnyMethod()
+//);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
