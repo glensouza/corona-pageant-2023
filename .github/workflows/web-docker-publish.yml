@@ -46,7 +46,6 @@ jobs:
         
       - name: Publish latest containers
         run: |
-          docker rm coronapageant
-          docker rm coronapageantviewer
+          docker ps -aq | xargs docker stop | xargs docker rm
           docker-compose pull
           docker-compose up -d
