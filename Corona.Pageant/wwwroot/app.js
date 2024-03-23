@@ -12,6 +12,7 @@ var pageant = (function () {
     var settingCam3IP = "";
     var scriptAct = null;
     var scriptScene = null;
+    var scriptSceneLength = 0;
     var scriptSwitchToScene = null;
     var scriptCamera1Action = null;
     var scriptCamera2Action = null;
@@ -32,6 +33,7 @@ var pageant = (function () {
         pageantMain = $("#pageantMain");
         scriptAct = $("#act");
         scriptScene = $("#scene");
+        scriptSceneLength = $("#sceneLength");
         scriptSwitchToScene = $("#switchToScene");
         scriptCamera1Action = $("#camera1Action");
         scriptCamera2Action = $("#camera2Action");
@@ -56,6 +58,8 @@ var pageant = (function () {
                 scriptAct.prop('disabled', true);
                 scriptScene.val(tempScene.scene);
                 scriptScene.prop('disabled', true);
+                scriptSceneLength.val(tempScene.sceneLength);
+                scriptSceneLength.prop('disabled', true);
                 scriptSwitchToScene.val(tempScene.switchToScene);
                 scriptCamera1Action.val(tempScene.camera1Action);
                 scriptCamera2Action.val(tempScene.camera2Action);
@@ -69,6 +73,8 @@ var pageant = (function () {
                 scriptAct.prop('disabled', false);
                 scriptScene.val('');
                 scriptScene.prop('disabled', false);
+                scriptSceneLength.val('');
+                scriptSceneLength.prop('disabled', false);
                 scriptSwitchToScene.val('');
                 scriptCamera1Action.val('');
                 scriptCamera2Action.val('');
@@ -140,11 +146,13 @@ var pageant = (function () {
     function scriptPart() {
         var act = scriptAct.val();
         var scene = scriptScene.val();
+        var sceneLength = scriptSceneLength.val();
         showLoading();
         const newScene =
         {
             act: act,
             scene: scene,
+            sceneLength: sceneLength,
             text: scriptText.val(),
             camera1Action: scriptCamera1Action.val(),
             camera1Position: scriptCamera1Position.val(),
@@ -175,7 +183,8 @@ var pageant = (function () {
         });
     }
 
-    function runAction(act, scene) {
+    function runAction(act, scene, sceneLength) {
+        // TODO: Start timer for scene length
         $.ajax({
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
@@ -257,13 +266,18 @@ var pageant = (function () {
                     theScript.append('<h2 class="mt-4">Act ' + script.act + '<br />Scene ' + script.scene + '</h2>');
                     var table = '<table class="table table-striped table-bordered table-hover table-sm">';
                     table += '<tr><th>Setting</th><th>Action</th><th>Position</th></tr>';
+                    table += '<tr><td>Scene Length</td><td>' + script.sceneLength + '</td></tr>';
                     table += '<tr><td>Scene</td><td>' + script.switchToScene + '</td><td></td></tr>';
                     table += '<tr><td>Cam 1</td><td>' + script.camera1Action + '</td><td>' + script.camera1Position + '</td></tr>';
                     table += '<tr><td>Cam 2</td><td>' + script.camera2Action + '</td><td>' + script.camera2Position + '</td></tr>';
                     table += '<tr><td>Cam 3</td><td>' + script.camera3Action + '</td><td>' + script.camera3Position + '</td></tr>';
+                    table += '<tr><td>Spotlight Left</td><td colspan=2>' + script.spotlightLeft + '</td></tr>';
+                    table += '<tr><td>Spotlight Right</td><td colspan=2>' + script.spotlightRight + '</td></tr>';
+                    table += '<tr><td>Stage Lights</td><td colspan=2>' + script.stageLightScene + '</td></tr>';
+                    table += '<tr><td>House Lights</td><td colspan=2>' + script.houseLights + '</td></tr>';
+                    table += '<tr><td>Lighting Notes</td><td colspan=2>' + script.lightingNotes + '</td></tr>';
                     table += '</table>';
-
-                    theScript.append('<div class="row mb-3"><div class="col-md-8 themed-grid-col" style="white-space: pre-line">' + script.text + '</div><div class="col-md-4 themed-grid-col"><button class="btn btn-primary btn-sml" onclick="pageant.runAction(\'' + script.act + '\' , \'' + script.scene + '\')">Run</button><button class="btn btn-success btn-sml" data-bs-toggle="modal" data-bs-target="#script" data-bs-act="' + script.act + '" data-bs-scene="' + script.scene + '">Edit</button><br />' + table + '</div></div>');
+                    theScript.append('<div class="row mb-3"><div class="col-md-8 themed-grid-col" style="white-space: pre-line">' + script.text + '</div><div class="col-md-4 themed-grid-col"><button class="btn btn-primary btn-sml" onclick="pageant.runAction(\'' + script.act + '\' , \'' + script.scene + '\', ' + script.sceneLength + ')">Run</button><button class="btn btn-success btn-sml" data-bs-toggle="modal" data-bs-target="#script" data-bs-act="' + script.act + '" data-bs-scene="' + script.scene + '">Edit</button><br />' + table + '</div></div>');
                     hideLoading();
                 });
             },

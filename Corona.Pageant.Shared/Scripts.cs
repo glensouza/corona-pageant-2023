@@ -13,6 +13,9 @@ namespace Corona.Pageant.Shared
         public string Scene { get; set; } = string.Empty;
 
         [Required]
+        public int SceneLength { get; set; }
+
+        [Required]
         public string Text { get; set; } = string.Empty;
 
         [Required]
