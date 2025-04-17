@@ -7,16 +7,20 @@ var settings = (function () {
     var settingObsCam1Scene = "";
     var settingObsCam2Scene = "";
     var settingObsCam3Scene = "";
+    var settingObsCam4Scene = "";
     var dropdownObsComputerScene = null;
     var dropdownObsCam1Scene = null;
     var dropdownObsCam2Scene = null;
     var dropdownObsCam3Scene = null;
+    var dropdownObsCam4Scene = null;
     var textCam1ip = null;
     var textCam2ip = null;
     var textCam3ip = null;
+    var textCam4ip = null;
     var ipCam1Save = null;
     var ipCam2Save = null;
     var ipCam3Save = null;
+    var ipCam4Save = null;
     var exportPrepare = null;
     var exportDiv = null;
     var importFile = null;
@@ -34,6 +38,8 @@ var settings = (function () {
         dropdownObsCam2Scene.change({ scene: "Cam2Scene" }, changeObsSetting);
         dropdownObsCam3Scene = $("#obsCam3");
         dropdownObsCam3Scene.change({ scene: "Cam3Scene" }, changeObsSetting);
+        dropdownObsCam4Scene = $("#obsCam4");
+        dropdownObsCam4Scene.change({ scene: "Cam4Scene" }, changeObsSetting);
         buttonObsComputer = $("#obsComputerTest");
         buttonObsComputer.click({ scene: "ComputerScene" }, showObsScene);
         buttonObsCam1 = $("#obsCam1Test");
@@ -42,15 +48,20 @@ var settings = (function () {
         buttonObsCam2.click({ scene: "Cam2Scene" }, showObsScene);
         buttonObsCam3 = $("#obsCam3Test");
         buttonObsCam3.click({ scene: "Cam3Scene" }, showObsScene);
+        buttonObsCam4 = $("#obsCam4Test");
+        buttonObsCam4.click({ scene: "Cam4Scene" }, showObsScene);
         textCam1ip = $("#ipCam1");
         textCam2ip = $("#ipCam2");
         textCam3ip = $("#ipCam3");
+        textCam4ip = $("#ipCam4");
         ipCam1Save = $("#ipCam1Save");
         ipCam1Save.click({ camera: "1" }, saveCameraIp);
         ipCam2Save = $("#ipCam2Save");
         ipCam2Save.click({ camera: "2" }, saveCameraIp);
         ipCam3Save = $("#ipCam3Save");
         ipCam3Save.click({ camera: "3" }, saveCameraIp);
+        ipCam4Save = $("#ipCam4Save");
+        ipCam4Save.click({ camera: "4" }, saveCameraIp);
         exportPrepare = $("#prepareExport");
         exportPrepare.click(prepareExport);
         exportDiv = $("#export");
@@ -145,6 +156,9 @@ var settings = (function () {
             case "3":
                 newValue = textCam3ip.val();
                 break;
+            case "4":
+                newValue = textCam4ip.val();
+                break;
         }
 
         if (newValue !== "") {
@@ -185,6 +199,9 @@ var settings = (function () {
             case "Cam3Scene":
                 newValue = dropdownObsCam3Scene.val();
                 break;
+            case "Cam4Scene":
+                newValue = dropdownObsCam4Scene.val();
+                break;
         }
 
         if (newValue !== "") {
@@ -208,6 +225,9 @@ var settings = (function () {
                             break;
                         case "Cam3Scene":
                             settingObsCam3Scene = newValue;
+                            break;
+                        case "Cam4Scene":
+                            settingObsCam4Scene = newValue;
                             break;
                     }
                 },
@@ -253,6 +273,9 @@ var settings = (function () {
             case "Cam3Scene":
                 scene = settingObsCam3Scene;
                 break;
+            case "Cam4Scene":
+                scene = settingObsCam4Scene;
+                break;
         }
 
         if (scene !== "") {
@@ -286,6 +309,9 @@ var settings = (function () {
                                 case "Cam3Scene":
                                     settingObsCam3Scene = setting.setting;
                                     break;
+                                case "Cam4Scene":
+                                    settingObsCam4Scene = setting.setting;
+                                    break;
                             }
                             break;
                         case "Camera":
@@ -298,6 +324,9 @@ var settings = (function () {
                                     break;
                                 case "3":
                                     textCam3ip.val(setting.setting);
+                                    break;
+                                case "4":
+                                    textCam4ip.val(setting.setting);
                                     break;
                             }
                             break;
@@ -329,6 +358,7 @@ var settings = (function () {
         dropdownObsCam1Scene.append(`<option value="">Select a scene</option>`);
         dropdownObsCam2Scene.append(`<option value="">Select a scene</option>`);
         dropdownObsCam3Scene.append(`<option value="">Select a scene</option>`);
+        dropdownObsCam4Scene.append(`<option value="">Select a scene</option>`);
         $.each(obsScenes, function (index, scene) {
             if (scene === settingObsComputerScene) {
                 dropdownObsComputerScene.append(`<option value="${scene}" selected>${scene}</option>`);
@@ -353,6 +383,12 @@ var settings = (function () {
             }
             else {
                 dropdownObsCam3Scene.append(`<option value="${scene}">${scene}</option>`);
+            }
+
+            if (scene === settingObsCam4Scene) {
+                dropdownObsCam4Scene.append(`<option value="${scene}" selected>${scene}</option>`);
+            } else {
+                dropdownObsCam4Scene.append(`<option value="${scene}">${scene}</option>`);
             }
         });
     }

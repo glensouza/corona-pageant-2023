@@ -7,9 +7,11 @@ var pageant = (function () {
     var settingObsCam1Scene = "";
     var settingObsCam2Scene = "";
     var settingObsCam3Scene = "";
+    var settingObsCam4Scene = "";
     var settingCam1IP = "";
     var settingCam2IP = "";
     var settingCam3IP = "";
+    var settingCam4IP = "";
     var scriptAct = null;
     var scriptScene = null;
     var scriptSceneLength = 0;
@@ -17,9 +19,11 @@ var pageant = (function () {
     var scriptCamera1Action = null;
     var scriptCamera2Action = null;
     var scriptCamera3Action = null;
+    var scriptCamera4Action = null;
     var scriptCamera1Position = null;
     var scriptCamera2Position = null;
     var scriptCamera3Position = null;
+    var scriptCamera4Position = null;
     var scriptText = null;
     var saveScript = null;
     var theScript = null;
@@ -38,9 +42,11 @@ var pageant = (function () {
         scriptCamera1Action = $("#camera1Action");
         scriptCamera2Action = $("#camera2Action");
         scriptCamera3Action = $("#camera3Action");
+        scriptCamera4Action = $("#camera4Action");
         scriptCamera1Position = $("#camera1Position");
         scriptCamera2Position = $("#camera2Position");
         scriptCamera3Position = $("#camera3Position");
+        scriptCamera4Position = $("#camera4Position");
         scriptText = $("#scriptText");
         saveScript = $("#saveScript");
         saveScript.click(scriptPart);
@@ -67,6 +73,7 @@ var pageant = (function () {
                 scriptCamera1Position.val(tempScene.camera1Position);
                 scriptCamera2Position.val(tempScene.camera2Position);
                 scriptCamera3Position.val(tempScene.camera3Position);
+                scriptCamera4Position.val(tempScene.camera4Position);
                 scriptText.val(tempScene.text);
             } else {
                 scriptAct.val('');
@@ -82,6 +89,7 @@ var pageant = (function () {
                 scriptCamera1Position.val('');
                 scriptCamera2Position.val('');
                 scriptCamera3Position.val('');
+                scriptCamera4Position.val('');
                 scriptText.val('');
             }
         })
@@ -160,6 +168,7 @@ var pageant = (function () {
             camera2Position: scriptCamera2Position.val(),
             camera3Action: scriptCamera3Action.val(),
             camera3Position: scriptCamera3Position.val(),
+            camera4Action: scriptCamera4Action.val(),
             switchToScene: scriptSwitchToScene.val()
         };
         $.ajax({
@@ -217,6 +226,9 @@ var pageant = (function () {
             case "cam3":
                 obsScene = settingObsCam3Scene;
                 break;
+            case "cam4":
+                obsScene = settingObsCam4Scene;
+                break;
         }
 
         if (obsScene !== "") {
@@ -252,6 +264,10 @@ var pageant = (function () {
         if (tempScene.camera3Action === "prepare") {
             setTimeout(runActionAPI(settingCam3IP, tempScene.camera3Position), 3000);
         }
+
+        if (tempScene.camera4Action === "prepare") {
+            setTimeout(runActionAPI(settingCam4IP, tempScene.camera4Position), 3000);
+        }
     }
 
     function getScript() {
@@ -271,6 +287,7 @@ var pageant = (function () {
                     table += '<tr><td>Cam 1</td><td>' + script.camera1Action + '</td><td>' + script.camera1Position + '</td></tr>';
                     table += '<tr><td>Cam 2</td><td>' + script.camera2Action + '</td><td>' + script.camera2Position + '</td></tr>';
                     table += '<tr><td>Cam 3</td><td>' + script.camera3Action + '</td><td>' + script.camera3Position + '</td></tr>';
+                    table += '<tr><td>Cam 4</td><td>' + script.camera4Action + '</td><td>' + script.camera4Position + '</td></tr>';
                     table += '<tr><td>Spotlight Left</td><td colspan=2>' + script.spotlightLeft + '</td></tr>';
                     table += '<tr><td>Spotlight Right</td><td colspan=2>' + script.spotlightRight + '</td></tr>';
                     table += '<tr><td>Stage Lights</td><td colspan=2>' + script.stageLightScene + '</td></tr>';
@@ -317,6 +334,9 @@ var pageant = (function () {
                                 case "Cam3Scene":
                                     settingObsCam3Scene = setting.setting;
                                     break;
+                                case "Cam4Scene":
+                                    settingObsCam4Scene = setting.setting;
+                                    break;
                             }
                             break;
                         case "Camera":
@@ -329,6 +349,9 @@ var pageant = (function () {
                                     break;
                                 case "3":
                                     settingCam3IP = setting.setting;
+                                    break;
+                                case "4":
+                                    settingCam4IP = setting.setting;
                                     break;
                             }
                             break;
