@@ -36,6 +36,11 @@ namespace Corona.Pageant.Shared
 
         public string Camera3Position { get; set; } = string.Empty;
 
+        [Required]
+        public string Camera4Action { get; set; } = string.Empty;
+
+        public string Camera4Position { get; set; } = string.Empty;
+
         public string NavClass { get; set; } = string.Empty;
 
         public string StageLightScene { get; set; } = string.Empty;
