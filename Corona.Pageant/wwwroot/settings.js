@@ -21,6 +21,8 @@ var settings = (function () {
     var ipCam2Save = null;
     var ipCam3Save = null;
     var ipCam4Save = null;
+    var testCams = null;
+    var runCamTest = null;
     var exportPrepare = null;
     var exportDiv = null;
     var importFile = null;
@@ -62,6 +64,23 @@ var settings = (function () {
         ipCam3Save.click({ camera: "3" }, saveCameraIp);
         ipCam4Save = $("#ipCam4Save");
         ipCam4Save.click({ camera: "4" }, saveCameraIp);
+        testCams.click(function () {
+            testCams = $("#testCams");
+            if (testCams && testCams.val() !== "") {
+                if (textCam1ip && textCam1ip.val() !== "") {
+                    runActionAPI(textCam1ip.val(), testCams);
+                }
+            }
+            if (textCam2ip && textCam2ip.val() !== "") {
+                runActionAPI(textCam2ip.val(), testCams);
+            }
+            if (textCam3ip && textCam3ip.val() !== "") {
+                runActionAPI(textCam3ip.val(), testCams);
+            }
+            if (textCam4ip && textCam4ip.val() !== "") {
+                runActionAPI(textCam4ip.val(), testCams);
+            }
+        });
         exportPrepare = $("#prepareExport");
         exportPrepare.click(prepareExport);
         exportDiv = $("#export");
@@ -393,6 +412,24 @@ var settings = (function () {
         });
     }
 
+    function runActionAPI(camIP, camPosition) {
+        $.ajax({
+            type: 'GET',
+            url: '/api/runAction/' + camIP + '/' + camPosition,
+            success: function (result, status, xhr) {
+                console.log("success running camera " + camIP + " position " + camPosition + " action");
+            },
+            error: function (xhr, status, error) {
+                let errorMessage = `${xhr.status} ${status} `;
+                if (status !== xhr.statusText) {
+                    errorMessage += `(${xhr.statusText}) `;
+                }
+                errorMessage += `running camera ${camIP} position ${camPosition} action: ${xhr.responseJSON ? xhr.responseJSON.message : xhr.responseText}. Please try again later`;
+                console.error(errorMessage);
+            }
+        });
+    }
+    
     return {
         initialize: initialize
     }
